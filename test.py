@@ -107,7 +107,10 @@ plt.show()
 #with pydicom
 dcm_data = pydicom.dcmread("C:/Users/sheil/OneDrive/Documentos/Uni/Internship CDSS/1-37.dcm")
 
-# """"""""""Image representation with matplot
+"""
+Image representation with matplot
+"""
+
 im = dcm_data.pixel_array
 
 #plt.imshow(im, cmap='gray')
