@@ -24,6 +24,10 @@ def imgToArrayMaxMin(
     img_array = sitk.GetArrayFromImage(image)
     max = np.max(img_array)
     min = np.min(img_array)
+
+    if(max>12000):
+        print(dcm_dir)
+
     return max,min
 
 def get_all_patients_maxMin(
@@ -52,11 +56,11 @@ def get_all_patients_maxMin(
 def plotMaxMinPixel():
     max_list, min_list = get_all_patients_maxMin("D:\\Duke-Breast-Cancer-MRI\\manifest-1654812109500\\Duke-Breast-Cancer-MRI")
     plt.title("Max pixel values")
-    plt.plot(max_list)
+    plt.hist(max_list, rwidth=1000)
     plt.show()
 
     plt.title("Min pixel values")
-    plt.plot(min_list)
+    plt.hist(min_list)
     plt.show()
 
     max = np.max(max_list)
