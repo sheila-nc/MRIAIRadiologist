@@ -20,19 +20,19 @@ class Normalizer(object):
                                         nifti_image.affine, nifti_image.header)
         return scaled_nifti_image
 
-    def normalize_z_score(self, nifti_image, mask, scaled_value):
-        import pdb; pdb.set_trace()
+    def normalizeDICOM(self, nifti_image, mask, scaled_value):
+        #import pdb; pdb.set_trace()
         img_data = numpy.asanyarray(nifti_image.dataobj)
         if mask == 'nomask':
             mask_data = img_data
         logical_mask = mask_data == 1
-        mean = img_data[logical_mask].mean() 
-        std = img_data[logical_mask].std() 
-        normalized = nib.Nifti1Image((img_data - mean) / std, \
+        normalized = nib.Nifti1Image(img_data / img_data.max(), \
                                             nifti_image.affine, nifti_image.header)
         normalized = self.translate_3d_volume(normalized)
         normalized = self.scale_3d_volume(normalized, scaled_value)
         return normalized
+    
+
     
 
 
